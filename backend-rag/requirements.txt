@@ -1,0 +1,13 @@
+fastapi
+uvicorn[standard]
+pandas
+numpy
+rank-bm25
+scikit-learn
+faiss-cpu
+sentence-transformers
+diskcache
+requests
+python-dotenv
+pydantic
+torch
