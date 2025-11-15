@@ -1,3 +1,4 @@
+.vscode
 backend-rag/.env
 backend-rag/venv
 frontend-streamlit/venv
