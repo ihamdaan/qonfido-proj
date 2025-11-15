@@ -3,8 +3,15 @@ import requests
 import time
 import json
 from datetime import datetime, timedelta
+import os
+from dotenv import load_dotenv
 
-BACKEND_URL = "http://127.0.0.1:8000/query"
+# Load .env file
+load_dotenv()
+
+# Read environment variable
+BACKEND_URL = os.getenv("BACKEND_URL_LINK")
+
 
 COOLDOWN_SECONDS = 30  
 

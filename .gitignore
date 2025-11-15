@@ -2,3 +2,4 @@
 backend-rag/.env
 backend-rag/venv
 frontend-streamlit/venv
+frontend-streamlit/.env
