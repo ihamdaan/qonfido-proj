@@ -11,7 +11,8 @@ def _call_openrouter(messages: list, reasoning: bool = True, temperature: float 
     url = f"{OPENROUTER_BASE_URL}/chat/completions"
     headers = {
     "Authorization": f"Bearer {OPENROUTER_API_KEY}",
-    "Content-Type": "application/json",
+    "HTTP-Referer": "https://qonfido-backend-rag.up.railway.app",
+    "X-Title": "Qonfido AI Project",
     }
     payload = {
     "model": LLM_MODEL,

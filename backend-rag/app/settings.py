@@ -21,7 +21,7 @@ DISKCACHE_DIR = str(EMBEDDINGS_CACHE_PATH)
 # OpenRouter
 OPENROUTER_API_KEY = os.environ.get("OPENROUTER_API_KEY")
 OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
-LLM_MODEL = "openai/gpt-oss-20b:free"
+LLM_MODEL = "openai/gpt-oss-120b"
 MAX_TOKEN_OUTPUT = 2200
 
 # Retrieval tuning

@@ -6,12 +6,9 @@ from datetime import datetime, timedelta
 import os
 from dotenv import load_dotenv
 
-# Load .env file
 load_dotenv()
 
-# Read environment variable
 BACKEND_URL = os.getenv("BACKEND_URL_LINK")
-
 
 COOLDOWN_SECONDS = 30  
 
@@ -315,7 +312,7 @@ else:
             "content": f"{user_input} (search mode: {mode})"
         })
 
-        with st.spinner("Thinking..."):
+        with st.spinner("Analyzing Query.. Retrieving the best Source... Generating Response..."):
             result = call_backend(user_input, mode)
 
         assistant_msg = {
