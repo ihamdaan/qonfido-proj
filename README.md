@@ -18,14 +18,14 @@ This project fulfills **Assignment Option #1: Mini RAG with Financial Data** fro
 - ✅ **Hybrid Search**: Combined lexical + semantic retrieval with weighted scoring
 - ✅ **Disk Caching**: Implemented for embeddings and retrieval results
 
-### Additional Enhancements (Beyond Requirements) 
+### Additional Enhancements (Beyond Requirements) ⭐✅
 
 To demonstrate end-to-end product thinking and improve evaluation experience, I went beyond the assignment scope:
 
-1. **Interactive Frontend**: Built Streamlit UI for real-time query testing without API calls
-2. **Deployment**: Deployed both backend and frontend for remote access (no local setup needed for reviewers)
-3. **Advanced Numeric Retrieval**: Added fourth retrieval method specifically optimized for scaled numerical data and rank-based queries (industry best practice)
-4. **LLM Integration**: Purchased $5 OpenRouter credits to enable smooth LLM-powered answer generation during evaluation (avoids rate limiting issues)
+1. ⭐ **Interactive Frontend**: Built Streamlit UI for real-time query testing without API calls
+2. ⭐ **Deployment**: Deployed both backend and frontend for remote access (no local setup needed for reviewers)
+3. ⭐ **Advanced Numeric Retrieval**: Added fourth retrieval method specifically optimized for scaled numerical data and rank-based queries (industry best practice)
+4. ⭐ **LLM Integration**: Purchased $5 OpenRouter credits to enable smooth LLM-powered answer generation during evaluation (avoids rate limiting issues)
 
 **Note**: These extras were implemented post-assignment to enhance demonstration quality and reviewer experience.
 
