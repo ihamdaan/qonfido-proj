@@ -127,7 +127,7 @@ The frontend will run on **http://localhost:8501**
 3. Select your preferred retrieval method
 4. Enter your query and view results
 
-## API Documentation
+## API Access
 
 Once the backend is running, visit **http://localhost:8000/query** for interactive API route.
 
