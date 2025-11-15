@@ -9,6 +9,11 @@ class HybridRetriever:
         self.sem = SemanticRetriever()
         self.num = NumericRetriever()
 
+    def _is_definition_query(self, q: str) -> bool:
+        q = q.lower()
+        keywords = ["what is", "what does", "meaning", "mean", "explain", "define", "state", "mention"]
+        return any(k in q for k in keywords)    
+
     def retrieve(self, query: str, top_k: int = 10, alpha: float = HYBRID_ALPHA):
 
         if self.num.is_numeric_query(query):
@@ -18,6 +23,13 @@ class HybridRetriever:
                 faq_context = self.sem.retrieve(query, top_k=3)
                 faq_only = [r for r in faq_context if r["source"]["type"] == "faq"]
                 return num_results + faq_only
+            
+        if self._is_definition_query(query):
+            lex_res = [r for r in self.lex.retrieve(query, top_k=TOP_K_LEXICAL) 
+                    if r["source"]["type"] == "faq"]
+            sem_res = [r for r in self.sem.retrieve(query, top_k=TOP_K_SEMANTIC) 
+                    if r["source"]["type"] == "faq"]
+            return lex_res + sem_res    
 
         lex_res = self.lex.retrieve(query, top_k=TOP_K_LEXICAL)
         sem_res = self.sem.retrieve(query, top_k=TOP_K_SEMANTIC)

@@ -312,7 +312,7 @@ else:
             "content": f"{user_input} (search mode: {mode})"
         })
 
-        with st.spinner("Analyzing Query.. Retrieving the best Source... Generating Response..."):
+        with st.spinner("Analyzing Query.... Retrieving the best Source... Generating Response.."):
             result = call_backend(user_input, mode)
 
         assistant_msg = {
