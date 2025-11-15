@@ -25,6 +25,7 @@ LLM_MODEL = "openai/gpt-oss-120b"
 MAX_TOKEN_OUTPUT = 2200
 
 # Retrieval tuning
-TOP_K_LEXICAL = 10
-TOP_K_SEMANTIC = 10
+TOP_K_LEXICAL = 5
+TOP_K_SEMANTIC = 5
+FAQ_TOP_K = 2
 HYBRID_ALPHA = 0.5 # weight for semantic when fusing scores (0 to 1)

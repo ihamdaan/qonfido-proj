@@ -1,7 +1,7 @@
 from .lexical import LexicalRetriever
 from .semantic import SemanticRetriever
 from .numeric import NumericRetriever
-from app.settings import HYBRID_ALPHA, TOP_K_LEXICAL, TOP_K_SEMANTIC
+from app.settings import HYBRID_ALPHA, TOP_K_LEXICAL, TOP_K_SEMANTIC, FAQ_TOP_K
 
 class HybridRetriever:
     def __init__(self):
@@ -11,7 +11,7 @@ class HybridRetriever:
 
     def _is_definition_query(self, q: str) -> bool:
         q = q.lower()
-        keywords = ["what is", "what does", "meaning", "mean", "explain", "define", "state", "mention"]
+        keywords = ["meaning", "mean", "explain", "define", "state", "mention"]
         return any(k in q for k in keywords)    
 
     def retrieve(self, query: str, top_k: int = 10, alpha: float = HYBRID_ALPHA):
@@ -25,11 +25,45 @@ class HybridRetriever:
                 return num_results + faq_only
             
         if self._is_definition_query(query):
-            lex_res = [r for r in self.lex.retrieve(query, top_k=TOP_K_LEXICAL) 
+            lex_res = [r for r in self.lex.retrieve(query, top_k=FAQ_TOP_K)
                     if r["source"]["type"] == "faq"]
-            sem_res = [r for r in self.sem.retrieve(query, top_k=TOP_K_SEMANTIC) 
+            sem_res = [r for r in self.sem.retrieve(query, top_k=FAQ_TOP_K)
                     if r["source"]["type"] == "faq"]
-            return lex_res + sem_res    
+
+            candidates = {}
+
+            for r in lex_res:
+                sid = r["source"]["id"]
+                candidates[sid] = {
+                    "source": r["source"],
+                    "text": r["text"],
+                    "lex_score": r["score"],
+                    "sem_score": 0.0
+                }
+
+            for r in sem_res:
+                sid = r["source"]["id"]
+                if sid not in candidates:
+                    candidates[sid] = {
+                        "source": r["source"],
+                        "text": r["text"],
+                        "lex_score": 0.0,
+                        "sem_score": r["score"]
+                    }
+                else:
+                    candidates[sid]["sem_score"] = r["score"]
+
+            fused = []
+            for sid, v in candidates.items():
+                fused.append({
+                    "score": max(v["lex_score"], v["sem_score"]), 
+                    "source": v["source"],
+                    "text": v["text"],
+                    "lex_score": v["lex_score"],
+                    "sem_score": v["sem_score"],
+                })
+
+            return sorted(fused, key=lambda x: x["score"], reverse=True) 
 
         lex_res = self.lex.retrieve(query, top_k=TOP_K_LEXICAL)
         sem_res = self.sem.retrieve(query, top_k=TOP_K_SEMANTIC)
